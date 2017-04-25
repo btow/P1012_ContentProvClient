@@ -1,5 +1,6 @@
 package com.example.samsung.p1012_contentprovclient;
 
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -25,8 +26,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Cursor cursor = getContentResolver().query(CONTACT_URI, null, null, null, null);
-        startManagingCursor(cursor);
+        ContentResolver contentResolver = getContentResolver();
+        Cursor cursor = contentResolver.query(CONTACT_URI, null, null, null, null);
+        try {
+            startManagingCursor(cursor);
+        } catch (Exception e) {
+            String message = "MainActivity onCreate(): error: " + e.getClass() + " " + e.getMessage();
+            Messager.sendMessageToAllRecipients(this, message);
+        }
 
         String[] from = {"name", "email"};
         int[] to = {android.R.id.text1,android.R.id.text2};
@@ -75,7 +82,9 @@ public class MainActivity extends AppCompatActivity {
                     message = "MainActivity onClickBtn(): error: " + e.getClass() + " " + e.getMessage();
                     Messager.sendMessageToAllRecipients(this, message);
                 }
-
+                break;
+            default:
+                break;
         }
 
     }
