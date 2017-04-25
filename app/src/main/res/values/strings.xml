@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">P1012_ContentProvClient</string>
+    <string name="insert_records">Insert records</string>
+    <string name="update_records">Update records</string>
+    <string name="delete_records">Delete records</string>
+    <string name="error_in_records">Error in records</string>
+</resources>
